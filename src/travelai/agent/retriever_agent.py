@@ -39,7 +39,6 @@ facts not present in the retrieved chunks. If results look weak (low
 scores or few matches), say so rather than padding with your own
 knowledge."""
 
-
 class RetrieverAgent(Agent):
     name = "retriever"
     system_prompt = _SYSTEM_PROMPT

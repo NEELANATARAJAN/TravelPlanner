@@ -1,13 +1,13 @@
-
 [project]
 name = "travelplanner"
 version = "0.1.0"
 description = "AI to develop your dream's plan"
 readme = "README.md"
 requires-python = ">=3.13"
+authors = [{ name = "Neela Natarajan" }]
+license = "LicenseRef-Proprietary"
 dependencies = [
     "langgraph==1.2.10",
-    "pathlib==1.0.1",
     "ipykernel==7.3.0",
     "structlog==26.1.0",
     "tavily-python==0.7.27",
@@ -30,15 +30,15 @@ dependencies = [
     "python-dotenv>=1.2.2",
     "voyageai>=0.5.0",
     "anthropic==1.7.0",
-    "httpx==0.28.1",
     "pinecone==10.0.0",
     "openai==1.108.1",
 ]
 
-# Optional: authors, license
-authors = [{ name = "Neela Natarajan" }]
-license = { text = "Proprietary" }
+[project.scripts]
+travelplanner = "travelplanner.main:main"
+travelplanner-ingest = "travelplanner.pipeline.ingest:main"
+travelplanner-scheduler = "travelplanner.pipeline.scheduler:main"
 
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"

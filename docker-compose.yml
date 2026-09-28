@@ -1,0 +1,62 @@
+# docker-compose.yml
+# Stands up a local vLLM server exposing an OpenAI-compatible API for the
+# agent LLM, and optionally a second vLLM instance for embeddings.
+#
+# Usage:
+#   docker compose up -d llm-server            # LLM only
+#   docker compose up -d llm-server embed-server  # LLM + embeddings
+#
+# Then in your shell:
+#   export LLM_BACKEND=vllm
+#   export VLLM_BASE_URL=http://localhost:8000/v1
+#   export VLLM_MODEL=meta-llama/Llama-3.1-8B-Instruct
+#
+#   # optional, only if also using embed-server:
+#   export EMBED_BACKEND=vllm
+#   export VLLM_EMBED_BASE_URL=http://localhost:8001/v1
+#   export VLLM_EMBED_MODEL=BAAI/bge-m3
+#   export EMBED_DIMENSION=1024
+#
+# Requires an NVIDIA GPU + the NVIDIA Container Toolkit on the host.
+# Set HUGGING_FACE_HUB_TOKEN if the model is gated (e.g. Llama).
+
+services:
+  llm-server:
+    image: vllm/vllm-openai:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HUGGING_FACE_HUB_TOKEN:-}
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    command:
+      - --model=meta-llama/Llama-3.1-8B-Instruct
+      - --enable-auto-tool-choice
+      - --tool-call-parser=llama3_json
+      - --max-model-len=8192
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  embed-server:
+    image: vllm/vllm-openai:latest
+    ports:
+      - "8001:8000"
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HUGGING_FACE_HUB_TOKEN:-}
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    command:
+      - --model=BAAI/bge-m3
+      - --task=embed
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
