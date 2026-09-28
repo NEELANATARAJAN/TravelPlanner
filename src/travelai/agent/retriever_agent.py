@@ -11,8 +11,8 @@ never needs to know retrieval moved from local JSON + keyword matching to
 Pinecone + embeddings.
 """
 
-from agent import Agent
-import pinecone_store
+from src.travelai.agent.agent import Agent
+import src.travelai.rag.pinecone_store as pinecone_store
 
 _TOOLS = [
     {

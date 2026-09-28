@@ -8,7 +8,7 @@ Usage:
 
 import sys
 
-from orchestrator import plan_trip
+from src.travelai.agent.orchestrator import plan_trip
 
 
 def main():

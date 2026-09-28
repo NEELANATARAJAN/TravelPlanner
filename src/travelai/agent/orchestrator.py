@@ -16,9 +16,9 @@ means changing/adding one file — the orchestrator's tool schema and
 delegation logic barely change.
 """
 
-from agent import Agent
-from retriever_agent import RetrieverAgent
-from weather_agent import WeatherAgent
+from src.travelai.agent.agent import Agent
+from src.travelai.agent.retriever_agent import RetrieverAgent
+from src.travelai.weather_agent import WeatherAgent
 
 _TOOLS = [
     {

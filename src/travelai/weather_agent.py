@@ -6,7 +6,7 @@ internally so the orchestrator only ever needs to pass a place name.
 
 import httpx
 
-from agent import Agent
+from src.travelai.agent.agent import Agent
 
 _TOOLS = [
     {

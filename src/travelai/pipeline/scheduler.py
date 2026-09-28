@@ -18,7 +18,7 @@ Usage:
 import threading
 import time
 
-from ingest import run_full_ingest
+from travelai.ingest import run_full_ingest
 
 INTERVAL_SEC = 6 * 60 * 60  # re-ingest every 6 hours; tune to how often Wikivoyage content changes
 

@@ -11,7 +11,7 @@ import os
 
 from pinecone import Pinecone, ServerlessSpec
 
-from embeddings import EMBED_DIMENSION, embed_documents, embed_query
+from src.travelai.rag.embeddings import EMBED_DIMENSION, embed_documents, embed_query
 
 INDEX_NAME = os.environ.get("PINECONE_INDEX", "travel-guides")
 

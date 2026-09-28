@@ -5,8 +5,8 @@ Wikivoyage article, chunk it, and upsert into Pinecone. This is what runs
 on a schedule (see scheduler.py) to keep the vector DB fresh.
 """
 
-from wikivoyage_loader import load_destination_chunks
-from pinecone_store import upsert_chunks
+from src.travelai.rag.wikivoyage_loader import load_destination_chunks
+from travelai.pinecone_store import upsert_chunks
 
 # Add/remove destinations here, or load this list from a config file /
 # database instead if it grows large.
